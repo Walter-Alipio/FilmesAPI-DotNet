@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 public class Filme
 {
+  public int Id { get; internal set; }
   [Required(ErrorMessage = "O campo Título é obrigratório.")]
   public string Titulo { get; set; }
   [Required(ErrorMessage = "O campo Diretor é obrigratório.")]
