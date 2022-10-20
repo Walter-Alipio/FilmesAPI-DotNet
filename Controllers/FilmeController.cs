@@ -23,9 +23,17 @@ public class FilmeController : ControllerBase
   /*
     Definimos o retorno com a interface IEnumerable para tornar o método mais generico e pronto para funcionar com quanquer metodo que implemente essa interface.
   */
-  // [HttpGet]
-  // public Filme showFilmesById(int id)
-  // {
-  //   return filmes[id];
-  // }
+  [HttpGet("{id}")]//identifica que este get espera um id
+  public Filme showFilmeById(int id)
+  {
+    return filmes.FirstOrDefault(filme => filme.Id == id);
+    // foreach (var filme in filmes)
+    // {
+    //   if (filme.Id == id)
+    //   {
+    //     return filme;
+    //   }
+    // }
+    // return null;
+  }
 }
