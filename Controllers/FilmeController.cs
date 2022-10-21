@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -5,22 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 public class FilmeController : ControllerBase
 {
   private FilmeContext _context;
-  public FilmeController(FilmeContext context)
+  private IMapper _mapper;
+  public FilmeController(FilmeContext context, IMapper mapper)
   {
     _context = context;
+    _mapper = mapper;
   }
 
   [HttpPost]
   public IActionResult addFilme([FromBody] CreateFilmeDTO filmeDTO)
   {
-
-    Filme filme = new Filme
-    {
-      Titulo = filmeDTO.Titulo,
-      Diretor = filmeDTO.Diretor,
-      Genero = filmeDTO.Genero,
-      Duracao = filmeDTO.Duracao
-    };
+    //mapeando os dados recebidos para o objeto Filme
+    Filme filme = _mapper.Map<Filme>(filmeDTO);
     _context.Filmes.Add(filme);
     _context.SaveChanges();
 
@@ -45,15 +42,7 @@ public class FilmeController : ControllerBase
     Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme != null)
     {
-      ReadFilmeDTO filmeDTO = new ReadFilmeDTO
-      {
-        Titulo = filme.Titulo,
-        Diretor = filme.Diretor,
-        Genero = filme.Genero,
-        Duracao = filme.Duracao,
-        Id = filme.Id,
-        HoraDaConsulta = DateTime.Now
-      };
+      ReadFilmeDTO filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
       return Ok(filmeDTO);
     }
     return NotFound();
@@ -75,10 +64,7 @@ public class FilmeController : ControllerBase
     {
       return NotFound();
     }
-    filme.Titulo = filmeDTO.Titulo;
-    filme.Diretor = filmeDTO.Diretor;
-    filme.Duracao = filmeDTO.Duracao;
-    filme.Genero = filmeDTO.Genero;
+    _mapper.Map(filmeDTO, filme);
     _context.SaveChanges();
     return NoContent();
   }
