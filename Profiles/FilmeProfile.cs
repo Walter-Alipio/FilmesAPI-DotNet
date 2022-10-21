@@ -9,3 +9,4 @@ public class FilmeProfile : Profile
     CreateMap<UpdateFilmeDTO, Filme>();
   }
 }
+//Os profiles serão utilizados pelo .Map. 
