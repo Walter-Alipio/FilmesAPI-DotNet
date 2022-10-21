@@ -49,4 +49,35 @@ public class FilmeController : ControllerBase
     // }
     // return null;
   }
+
+  [HttpPut("{id}")]
+  public IActionResult UpdateFilme(int id, [FromBody] Filme novoFilme)
+  {
+    Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    if (filme == null)
+    {
+      return NotFound();
+    }
+    filme.Titulo = novoFilme.Titulo;
+    filme.Diretor = novoFilme.Diretor;
+    filme.Duracao = novoFilme.Duracao;
+    filme.Genero = novoFilme.Genero;
+    _context.SaveChanges();
+    return NoContent();
+  }
+
+  [HttpDelete("{id}")]
+  public IActionResult deleteFilme(int id)
+  {
+    Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    if (filme == null)
+    {
+      return NotFound();
+    }
+
+    _context.Remove(filme);
+    _context.SaveChanges();
+    return NoContent(); //status 204, confirma a requisição mas não envia nenhum corpo de resposta.
+
+  }
 }
