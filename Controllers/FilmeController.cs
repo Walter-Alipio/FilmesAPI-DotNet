@@ -11,8 +11,16 @@ public class FilmeController : ControllerBase
   }
 
   [HttpPost]
-  public IActionResult addFilme([FromBody] Filme filme)
+  public IActionResult addFilme([FromBody] CreateFilmeDTO filmeDTO)
   {
+
+    Filme filme = new Filme
+    {
+      Titulo = filmeDTO.Titulo,
+      Diretor = filmeDTO.Diretor,
+      Genero = filmeDTO.Genero,
+      Duracao = filmeDTO.Duracao
+    };
     _context.Filmes.Add(filme);
     _context.SaveChanges();
 
@@ -37,7 +45,16 @@ public class FilmeController : ControllerBase
     Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme != null)
     {
-      return Ok(filme);
+      ReadFilmeDTO filmeDTO = new ReadFilmeDTO
+      {
+        Titulo = filme.Titulo,
+        Diretor = filme.Diretor,
+        Genero = filme.Genero,
+        Duracao = filme.Duracao,
+        Id = filme.Id,
+        HoraDaConsulta = DateTime.Now
+      };
+      return Ok(filmeDTO);
     }
     return NotFound();
     // foreach (var filme in filmes)
@@ -51,17 +68,17 @@ public class FilmeController : ControllerBase
   }
 
   [HttpPut("{id}")]
-  public IActionResult UpdateFilme(int id, [FromBody] Filme novoFilme)
+  public IActionResult UpdateFilme(int id, [FromBody] UpdateFilmeDTO filmeDTO)
   {
     Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme == null)
     {
       return NotFound();
     }
-    filme.Titulo = novoFilme.Titulo;
-    filme.Diretor = novoFilme.Diretor;
-    filme.Duracao = novoFilme.Duracao;
-    filme.Genero = novoFilme.Genero;
+    filme.Titulo = filmeDTO.Titulo;
+    filme.Diretor = filmeDTO.Diretor;
+    filme.Duracao = filmeDTO.Duracao;
+    filme.Genero = filmeDTO.Genero;
     _context.SaveChanges();
     return NoContent();
   }
