@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]//explicitando a rota como nome controlador
 public class FilmeController : ControllerBase
 {
-  private FilmeContext _context;
+  private AppDbContext _context;
   private IMapper _mapper;
-  public FilmeController(FilmeContext context, IMapper mapper)
+  public FilmeController(AppDbContext context, IMapper mapper)
   {
     _context = context;
     _mapper = mapper;
@@ -40,12 +40,12 @@ public class FilmeController : ControllerBase
   public IActionResult showFilmeById(int id)
   {
     Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-    if (filme != null)
+    if (filme == null)
     {
-      ReadFilmeDTO filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
-      return Ok(filmeDTO);
+      return NotFound();
     }
-    return NotFound();
+    ReadFilmeDTO filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
+    return Ok(filmeDTO);
     // foreach (var filme in filmes)
     // {
     //   if (filme.Id == id)
