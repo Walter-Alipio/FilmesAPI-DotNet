@@ -4,7 +4,8 @@ public class AppDbContext : DbContext
 {
   public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt) { }
 
-  protected override void OnModelCreating(ModelBuilder builder)
+  //defini como o modelo será criado através do ModelBuilder
+  protected override void OnModelCreating(ModelBuilder builder)//
   {
     builder.Entity<Endereco>()
       .HasOne(endereco => endereco.Cinema)
