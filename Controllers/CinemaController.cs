@@ -24,7 +24,7 @@ public class CinemaController : ControllerBase
   [HttpGet]
   public IActionResult showCinemas()
   {
-    return Ok(_context.Cinemas);
+    return Ok(_context.Cinemas.ToList());
   }
 
   [HttpGet("{id}")]
