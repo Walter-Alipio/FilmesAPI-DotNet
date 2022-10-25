@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
+using System.Text.Json.Serialization;
+
 public class Filme
 {
   [Key]

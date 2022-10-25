@@ -6,6 +6,11 @@ public class GerenteProfile : Profile
   {
 
     CreateMap<CreateGerenteDTO, Gerente>();
-    CreateMap<Gerente, ReadGerenteDTO>();
+
+    //Definindo quais os campos de cinemas seram exibidos 
+    CreateMap<Gerente, ReadGerenteDTO>()
+      .ForMember(gerente => gerente.Cinemas, opts => opts
+      .MapFrom(gerente => gerente.Cinemas.Select
+      (cine => new { cine.Id, cine.Nome, cine.Endereco, cine.EnderecoId })));
   }
 }
