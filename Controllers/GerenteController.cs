@@ -35,4 +35,19 @@ public class GerenteController : ControllerBase
     ReadGerenteDTO gerenteDTO = _mapper.Map<ReadGerenteDTO>(gerente);
     return Ok(gerenteDTO);
   }
+
+  [HttpDelete("{id}")]
+  public IActionResult deleteGerente(int id)
+  {
+    Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
+    if (gerente == null)
+    {
+      return NotFound();
+    }
+
+    _context.Remove(gerente);
+    _context.SaveChanges();
+    return NoContent();
+
+  }
 }
