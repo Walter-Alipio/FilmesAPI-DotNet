@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 public class Cinema
 {
@@ -11,5 +12,6 @@ public class Cinema
   public int EnderecoId { get; set; }
   public virtual Gerente Gernte { get; set; }
   public int GerenteId { get; set; }
+  [JsonIgnore]
   public virtual List<Sessao> Sessoes { get; set; }
 }

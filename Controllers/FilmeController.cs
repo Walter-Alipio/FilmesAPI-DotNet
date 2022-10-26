@@ -31,7 +31,7 @@ public class FilmeController : ControllerBase
   [HttpGet]
   public IActionResult showFilmes()
   {
-    return Ok(_context.Filmes);
+    return Ok(_context.Filmes.ToList());
   }
   /*
     Definimos o retorno com a interface IEnumerable para tornar o método mais generico e pronto para funcionar com quanquer metodo que implemente essa interface.
