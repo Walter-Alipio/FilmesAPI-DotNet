@@ -29,9 +29,28 @@ public class FilmeController : ControllerBase
   }
 
   [HttpGet]
-  public IActionResult showFilmes()
+  public IActionResult showFilmes([FromQuery] int? classificacaoEtaria = null)
   {
-    return Ok(_context.Filmes.ToList());
+    List<Filme> filmes;
+    if (classificacaoEtaria == null)
+    {
+      filmes = _context.Filmes.ToList();
+    }
+    else
+    {
+      filmes = _context.Filmes
+        .Where(filme => filme.ClassificacaoEtaria <= classificacaoEtaria).ToList();
+    }
+
+
+    if (filmes == null)
+    {
+      return NotFound();
+    }
+
+    List<ReadFilmeDTO> reaDtos = _mapper.Map<List<ReadFilmeDTO>>(filmes);
+
+    return Ok(reaDtos);
   }
   /*
     Definimos o retorno com a interface IEnumerable para tornar o método mais generico e pronto para funcionar com quanquer metodo que implemente essa interface.

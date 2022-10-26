@@ -22,9 +22,27 @@ public class CinemaController : ControllerBase
   }
 
   [HttpGet]
-  public IActionResult showCinemas()
+  public IActionResult showCinemas([FromQuery] string? nomeDoFilme)
   {
-    return Ok(_context.Cinemas.ToList());
+    List<Cinema> cinemas = _context.Cinemas.ToList();
+    if (cinemas == null)
+    {
+      return NotFound();
+    }
+
+    if (!string.IsNullOrEmpty(nomeDoFilme))
+    {
+      //LINQ
+      IEnumerable<Cinema> query = from cinema in cinemas
+                                  where cinema.Sessoes.Any(sessao =>
+                                  sessao.Filme.Titulo == nomeDoFilme)
+                                  select cinema;
+
+      cinemas = query.ToList();
+    }
+    List<ReadCinemaDTO> readDto = _mapper.Map<List<ReadCinemaDTO>>(cinemas);
+
+    return Ok(readDto);
   }
 
   [HttpGet("{id}")]
