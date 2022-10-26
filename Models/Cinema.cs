@@ -11,4 +11,5 @@ public class Cinema
   public int EnderecoId { get; set; }
   public virtual Gerente Gernte { get; set; }
   public int GerenteId { get; set; }
+  public virtual List<Sessao> Sessoes { get; set; }
 }
