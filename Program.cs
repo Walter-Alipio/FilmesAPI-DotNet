@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<FilmeService, FilmeService>();
 builder.Services.AddScoped<CinemaService, CinemaService>();
+builder.Services.AddScoped<EnderecoService, EnderecoService>();
 
 
 //string de conexão com banco de dados
