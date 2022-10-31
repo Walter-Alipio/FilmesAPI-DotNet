@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<FilmeService, FilmeService>();
+builder.Services.AddScoped<CinemaService, CinemaService>();
+
 
 //string de conexão com banco de dados
 builder.Services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySql(builder.Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0))));
