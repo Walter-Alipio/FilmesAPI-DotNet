@@ -10,7 +10,7 @@ public class SessaoService
     _mapper = mapper;
   }
 
-  internal ReadSessaoDTO AddSessao(CreateSessaoDTO sessaoDTO)
+  public ReadSessaoDTO AddSessao(CreateSessaoDTO sessaoDTO)
   {
     Sessao sessao = _mapper.Map<Sessao>(sessaoDTO);
     _context.Sessoes.Add(sessao);
@@ -19,7 +19,7 @@ public class SessaoService
     return _mapper.Map<ReadSessaoDTO>(sessao);
   }
 
-  internal ReadSessaoDTO ShowSessaoById(int id)
+  public ReadSessaoDTO ShowSessaoById(int id)
   {
     Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
     if (sessao == null)
