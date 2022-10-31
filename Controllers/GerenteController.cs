@@ -1,53 +1,42 @@
 using System.Globalization;
 using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
 public class GerenteController : ControllerBase
 {
-  private AppDbContext _context;
-  private IMapper _mapper;
+  private GerenteService _gerenteService;
 
-  public GerenteController(AppDbContext context, IMapper mapper)
+  public GerenteController(GerenteService gerenteService)
   {
-    _context = context;
-    _mapper = mapper;
+    _gerenteService = gerenteService;
   }
 
   [HttpPost]
   public IActionResult AddGerente([FromBody] CreateGerenteDTO gerenteDTO)
   {
-    Gerente gerente = _mapper.Map<Gerente>(gerenteDTO);
-    _context.Gerentes.Add(gerente);
-    _context.SaveChanges();
-    return CreatedAtAction(nameof(showGerenteaById), new { Id = gerente.Id }, gerente);
+    ReadGerenteDTO readDto = _gerenteService.AddGerente(gerenteDTO);
+
+    return CreatedAtAction(nameof(showGerenteaById), new { Id = readDto.Id }, readDto);
   }
 
   [HttpGet("{id}")]
   public IActionResult showGerenteaById(int id)
   {
-    Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
-    if (gerente == null)
-    {
-      return NotFound();
-    }
-    ReadGerenteDTO gerenteDTO = _mapper.Map<ReadGerenteDTO>(gerente);
-    return Ok(gerenteDTO);
+    ReadGerenteDTO readDto = _gerenteService.ShowGerenteById(id);
+    if (readDto == null) return NotFound();
+
+    return Ok(readDto);
   }
 
   [HttpDelete("{id}")]
   public IActionResult deleteGerente(int id)
   {
-    Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
-    if (gerente == null)
-    {
-      return NotFound();
-    }
+    Result resultado = _gerenteService.DeleteGerente(id);
+    if (resultado.IsFailed) return NotFound();
 
-    _context.Remove(gerente);
-    _context.SaveChanges();
     return NoContent();
-
   }
 }

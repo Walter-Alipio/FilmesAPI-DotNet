@@ -11,6 +11,7 @@ builder.Services.AddScoped<FilmeService, FilmeService>();
 builder.Services.AddScoped<CinemaService, CinemaService>();
 builder.Services.AddScoped<EnderecoService, EnderecoService>();
 builder.Services.AddScoped<SessaoService, SessaoService>();
+builder.Services.AddScoped<GerenteService, GerenteService>();
 
 
 //string de conexão com banco de dados
