@@ -1,5 +1,7 @@
 using System.Text;
+using FilmesAPI.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -40,6 +42,17 @@ builder.Services.AddAuthentication(auth =>
     ClockSkew = TimeSpan.Zero
   };
 });
+
+//Definindo autorização de acesso por idade
+builder.Services.AddAuthorization(options =>
+  {
+    options.AddPolicy("IdadeMinima", policy =>
+    {
+      policy.Requirements.Add(new IdadeMinimaRequired(18));
+    });
+  }
+);
+builder.Services.AddSingleton<IAuthorizationHandler, IdadeMinimaHandler>();
 
 //Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -29,7 +29,7 @@ public class FilmeController : ControllerBase
   }
 
   [HttpGet]
-  [Authorize(Roles = "admin , regular")]
+  [Authorize(Roles = "admin , regular", Policy = "IdadeMinima")]
   public IActionResult showFilmes([FromQuery] int? classificacaoEtaria = null)
   {
     List<ReadFilmeDTO> readDto = _filmeService.ShowFilmes(classificacaoEtaria);
