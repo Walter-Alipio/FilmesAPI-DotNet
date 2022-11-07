@@ -40,7 +40,7 @@ public class EnderecoService
 
   public Result UpdateEndereco(int id, UpdateEnderecoDTO enderecoDTO)
   {
-    Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+    Endereco? endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
     if (endereco == null)
     {
       return Result.Fail("Endereço não encontrado.");
@@ -52,7 +52,7 @@ public class EnderecoService
 
   public Result DeleteEndereco(int id)
   {
-    Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+    Endereco? endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
     if (endereco == null)
     {
       return Result.Fail("Endereço não encontrado.");

@@ -22,7 +22,7 @@ public class GerenteService
 
   public ReadGerenteDTO ShowGerenteById(int id)
   {
-    Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
+    Gerente? gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
     if (gerente == null)
     {
       return null;
@@ -32,7 +32,7 @@ public class GerenteService
 
   public Result DeleteGerente(int id)
   {
-    Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
+    Gerente? gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
 
     if (gerente == null)
     {

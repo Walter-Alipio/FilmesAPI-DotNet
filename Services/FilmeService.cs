@@ -46,7 +46,7 @@ public class FilmeService
 
   public ReadFilmeDTO ShowFilmeById(int id)
   {
-    Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    Filme? filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme != null)
     {
       ReadFilmeDTO filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
@@ -57,7 +57,7 @@ public class FilmeService
 
   public Result UpdateFilme(int id, UpdateFilmeDTO filmeDTO)
   {
-    Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    Filme? filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme == null)
     {
       return Result.Fail("Filme não encontrado");
@@ -69,7 +69,7 @@ public class FilmeService
 
   internal Result DeleteFilme(int id)
   {
-    Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    Filme? filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
     if (filme == null)
     {
       return Result.Fail("Filme não encontrado.");

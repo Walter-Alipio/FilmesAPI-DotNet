@@ -43,7 +43,7 @@ public class CinemaService
 
   public ReadCinemaDTO ShowCiemaById(int id)
   {
-    Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
+    Cinema? cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
     if (cinema == null)
     {
       return null;
@@ -54,7 +54,7 @@ public class CinemaService
 
   public Result UpdateCinema(int id, UpdateCinemaDTO cinemaDTO)
   {
-    Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
+    Cinema? cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
     if (cinema == null)
     {
       return Result.Fail("Cinema não encontrado");
@@ -66,7 +66,7 @@ public class CinemaService
 
   public Result DeleteCinema(int id)
   {
-    Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
+    Cinema? cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
     if (cinema == null)
     {
       return Result.Fail("Cinema não encontrado");

@@ -21,7 +21,7 @@ public class SessaoService
 
   public ReadSessaoDTO ShowSessaoById(int id)
   {
-    Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+    Sessao? sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
     if (sessao == null)
     {
       return null;
