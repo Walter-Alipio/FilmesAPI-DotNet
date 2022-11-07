@@ -1,5 +1,8 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,27 @@ builder.Services.AddScoped<GerenteService, GerenteService>();
 
 //string de conexão com banco de dados
 builder.Services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySql(builder.Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(8, 0))));
+
+//Adicionando schema de chave de autenticação
+builder.Services.AddAuthentication(auth =>
+{
+  auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(token =>
+{
+  token.RequireHttpsMetadata = false;
+  token.SaveToken = true;
+  token.TokenValidationParameters = new TokenValidationParameters
+  {
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes("0asdjas09djsa09djasdjsadajsd09asjd09sajcnzxn")
+      ),
+    ValidateIssuer = false,
+    ValidateAudience = false,
+    ClockSkew = TimeSpan.Zero
+  };
+});
 
 //Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -34,6 +58,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+//adicionando autenticação
+app.UseAuthentication();
 
 app.UseAuthorization();
 

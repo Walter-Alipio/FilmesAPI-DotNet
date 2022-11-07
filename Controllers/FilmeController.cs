@@ -1,5 +1,7 @@
+using System.Data;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,6 +16,7 @@ public class FilmeController : ControllerBase
   }
 
   [HttpPost]
+  [Authorize(Roles = "admin")]
   public IActionResult addFilme([FromBody] CreateFilmeDTO filmeDTO)
   {
     ReadFilmeDTO readDto = _filmeService.AddFilme(filmeDTO);
