@@ -38,6 +38,7 @@ public class FilmeController : ControllerBase
   }
 
   [HttpGet("{id}")]//identifica que este get espera um id
+  [Authorize(Roles = "admin , regular", Policy = "IdadeMinima")]
   public IActionResult showFilmeById(int id)
   {
     ReadFilmeDTO readDto = _filmeService.ShowFilmeById(id);
@@ -47,6 +48,7 @@ public class FilmeController : ControllerBase
   }
 
   [HttpPut("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult UpdateFilme(int id, [FromBody] UpdateFilmeDTO filmeDTO)
   {
     Result resultado = _filmeService.UpdateFilme(id, filmeDTO);
@@ -56,6 +58,7 @@ public class FilmeController : ControllerBase
   }
 
   [HttpDelete("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult deleteFilme(int id)
   {
     Result resultado = _filmeService.DeleteFilme(id);

@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,6 +15,7 @@ public class EnderecoController : ControllerBase
   }
 
   [HttpPost]
+  [Authorize(Roles = "admin")]
   public IActionResult addEndereco([FromBody] CreateEnderecoDTO enderecoDTO)
   {
     ReadEnderecoDTO readDto = _enderecoService.AddEndereco(enderecoDTO);
@@ -22,6 +24,7 @@ public class EnderecoController : ControllerBase
   }
 
   [HttpGet]
+  [Authorize(Roles = "admin , regular")]
   public IActionResult showEnderecos()
   {
     List<ReadEnderecoDTO> enderecos = _enderecoService.ShowEnderecos();
@@ -32,6 +35,7 @@ public class EnderecoController : ControllerBase
   }
 
   [HttpGet("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult showEnderecoById(int id)
   {
     ReadEnderecoDTO readDto = _enderecoService.ShowEnderecoById(id);
@@ -41,6 +45,7 @@ public class EnderecoController : ControllerBase
   }
 
   [HttpPut("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult UpdateEndereco(int id, [FromBody] UpdateEnderecoDTO enderecoDTO)
   {
     Result resultado = _enderecoService.UpdateEndereco(id, enderecoDTO);
@@ -50,6 +55,7 @@ public class EnderecoController : ControllerBase
   }
 
   [HttpDelete("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult deleteEndereco(int id)
   {
     Result resultado = _enderecoService.DeleteEndereco(id);

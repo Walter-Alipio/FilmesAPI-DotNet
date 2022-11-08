@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -12,6 +13,7 @@ public class SessaoController : ControllerBase
   }
 
   [HttpPost]
+  [Authorize(Roles = "admin")]
   public IActionResult addSessao([FromBody] CreateSessaoDTO sessaoDTO)
   {
     ReadSessaoDTO readDto = _sessaoService.AddSessao(sessaoDTO);
@@ -19,6 +21,7 @@ public class SessaoController : ControllerBase
   }
 
   [HttpGet("{id}")]
+  [Authorize(Roles = "admin , regular")]
   public IActionResult showSessaoById(int id)
   {
     ReadSessaoDTO readDto = _sessaoService.ShowSessaoById(id);

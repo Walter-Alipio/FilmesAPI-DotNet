@@ -1,6 +1,7 @@
 using System.Globalization;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -15,6 +16,7 @@ public class GerenteController : ControllerBase
   }
 
   [HttpPost]
+  [Authorize(Roles = "admin")]
   public IActionResult AddGerente([FromBody] CreateGerenteDTO gerenteDTO)
   {
     ReadGerenteDTO readDto = _gerenteService.AddGerente(gerenteDTO);
@@ -23,6 +25,7 @@ public class GerenteController : ControllerBase
   }
 
   [HttpGet("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult showGerenteaById(int id)
   {
     ReadGerenteDTO readDto = _gerenteService.ShowGerenteById(id);
@@ -32,6 +35,7 @@ public class GerenteController : ControllerBase
   }
 
   [HttpDelete("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult deleteGerente(int id)
   {
     Result resultado = _gerenteService.DeleteGerente(id);

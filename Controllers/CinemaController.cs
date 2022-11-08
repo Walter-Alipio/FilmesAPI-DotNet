@@ -1,5 +1,6 @@
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("[controller]")]
@@ -12,6 +13,7 @@ public class CinemaController : ControllerBase
   }
 
   [HttpPost]
+  [Authorize(Roles = "admin")]
   public IActionResult addCinema([FromBody] CreateCinemaDTO cinemaDTO)
   {
     ReadCinemaDTO readDto = _cinemaService.AddCinema(cinemaDTO);
@@ -20,6 +22,7 @@ public class CinemaController : ControllerBase
   }
 
   [HttpGet]
+  [Authorize(Roles = "admin , regular")]
   public IActionResult showCinemas([FromQuery] string? nomeDoFilme)
   {
     List<ReadCinemaDTO> readDto = _cinemaService.ShowCiemas(nomeDoFilme);
@@ -31,6 +34,7 @@ public class CinemaController : ControllerBase
   }
 
   [HttpGet("{id}")]
+  [Authorize(Roles = "admin , regular")]
   public IActionResult showCinemaById(int id)
   {
     ReadCinemaDTO readDto = _cinemaService.ShowCiemaById(id);
@@ -40,6 +44,7 @@ public class CinemaController : ControllerBase
   }
 
   [HttpPut("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult UpdateCinema(int id, [FromBody] UpdateCinemaDTO cinemaDTO)
   {
     Result resultado = _cinemaService.UpdateCinema(id, cinemaDTO);
@@ -48,6 +53,7 @@ public class CinemaController : ControllerBase
   }
 
   [HttpDelete("{id}")]
+  [Authorize(Roles = "admin")]
   public IActionResult deleteCinema(int id)
   {
     Result resultado = _cinemaService.DeleteCinema(id);
