@@ -1,3 +1,3 @@
 [submodule "UsuariosApi"]
-	path = UsuariosApi
-	url = ./UsuariosApi/
+	path = UsuariosApi/
+	url = ./UsuariosApi
