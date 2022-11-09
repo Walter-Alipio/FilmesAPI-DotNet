@@ -22,6 +22,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | ------ | ----------- | ------ | ----------------- | ----------- | ------------ |
 | POST   | admin       | /filme | Cadastra um filme | JSON        | -            |
 
+#### Body Params exemplo:
+
 ```
 {
     "titulo": "Pantera Negra",
@@ -56,6 +58,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | ------ | ----------- | ------------- | --------------------------- | ----------- | ------------ |
 | PUT    | admin       | /filme/`{id}` | Altera os dados de um filme | JSON        | -            |
 
+#### Body Params exemplo:
+
 ```
 {
     "titulo": "Pantera Negra",
@@ -83,6 +87,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | Método | Autorização | Rota      | Descrição            | Body Params | Query Params |
 | ------ | ----------- | --------- | -------------------- | ----------- | ------------ |
 | POST   | admin       | /endereco | Cadastra um endereço | JSON        | -            |
+
+#### Body Params exemplo:
 
 ```
 {
@@ -116,6 +122,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | ------ | ----------- | ---------------- | ------------------------------ | ----------- | ------------ |
 | PUT    | admin       | /endereco/`{id}` | Altera os dados de um endereco | JSON        | -            |
 
+#### Body Params exemplo:
+
 ```
 {
   "Logradouro": "Rua Augusta",
@@ -142,6 +150,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | ------ | ----------- | -------- | ------------------- | ----------- | ------------ |
 | POST   | admin       | /gerente | Cadastra um gerente | JSON        | -            |
 
+#### Body Params exemplo:
+
 ```
 {
   "Nome":"João da Silva"
@@ -165,6 +175,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | Método | Autorização | Rota    | Descrição          | Body Params | Query Params |
 | ------ | ----------- | ------- | ------------------ | ----------- | ------------ |
 | POST   | admin       | /cinema | Cadastra um cinema | JSON        | -            |
+
+#### Body Params exemplo:
 
 ```
 {
@@ -198,6 +210,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | ------ | ----------- | -------------- | ---------------------------- | ----------- | ------------ |
 | PUT    | admin       | /cinema/`{id}` | Altera os dados de um cinema | JSON        | -            |
 
+#### Body Params exemplo:
+
 ```
 {
   "Nome":"Itaú Cinemas - Augusta",
@@ -223,6 +237,8 @@ A autenticação feita por Bearer Token é necessária para todas as rotas.
 | Método | Autorização | Rota    | Descrição           | Body Params | Query Params |
 | ------ | ----------- | ------- | ------------------- | ----------- | ------------ |
 | POST   | admin       | /sessao | Cadastra uma sessão | JSON        | -            |
+
+#### Body Params exemplo:
 
 ```
 {
