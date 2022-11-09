@@ -10,10 +10,13 @@ O projeto tem como objetivo a criação de uma API no padrão REST que oferece a
 
 Novas entidades foram criadas com suas respectivas rotas. Agora o projeto conta com as entidades Cinemas, Endereços, Gerentes e Sessões. Para as consultas, é possível pesquisar filmes por seu id ou pela classificação etária, assim como na rota de cinema onde, além de pesquisar por id, é possível pesquisar o cinema pelo nome do filme.<br>
 Foram trabalhados relacionamentos 1:1, 1:n e n:n através do Entyti Framework.
+<br><br>
+Uma outra api foi criada para trabalhar com a parte de cadastro e login de usuários. Nela, foi trabalhado a parte de cadastro de usuários, roles, criação de tokens jwt e validação por email.<br>
+Para trabalhar com emails optei por utilizar o [MailTrap](https://mailtrap.io/).
 
 ## ✔️ Técnicas e tecnologias utilizadas
 
 - `MVC`, `DTOs (Data Transfer Objects)`, `Query Parameters` , `jwt baerer`
   <br>
 
-- [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) , [EntityFrameworkCore 6.0.10](https://learn.microsoft.com/en-us/ef/) , [AutoMapper 12.0.0](https://automapper.org/) , [FluentResults 3.14.0](https://github.com/altmann/FluentResults) , [MySQL 8](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/) , [Pomelo.EntityFrameworkCore](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)
+- [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) , [EntityFrameworkCore 6.0.10](https://learn.microsoft.com/en-us/ef/) , [AutoMapper 12.0.0](https://automapper.org/) , [FluentResults 3.14.0](https://github.com/altmann/FluentResults) , [MySQL 8](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/) , [Pomelo.EntityFrameworkCore](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql) , [Identity 6.0.10](https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio)
